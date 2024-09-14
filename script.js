@@ -2,23 +2,24 @@ const player = document.getElementById('player');
 const ai = document.getElementById('ai');
 let playerPos = { x: 50, y: 50 };
 let aiPos = { x: 400, y: 400 };
-const stepSize = 10; // Distance AI moves towards the player each step
+const playerStepSize = 10; // Distance the player moves per key press
+const aiStepSize = 20; // Distance the AI moves towards the player each step
 const gameAreaSize = 500;
 
 // Move the player with arrow keys
 document.addEventListener('keydown', (event) => {
   switch (event.key) {
     case 'ArrowUp':
-      if (playerPos.y - stepSize >= 0) playerPos.y -= stepSize;
+      if (playerPos.y - playerStepSize >= 0) playerPos.y -= playerStepSize;
       break;
     case 'ArrowDown':
-      if (playerPos.y + stepSize <= gameAreaSize - 40) playerPos.y += stepSize;
+      if (playerPos.y + playerStepSize <= gameAreaSize - 40) playerPos.y += playerStepSize;
       break;
     case 'ArrowLeft':
-      if (playerPos.x - stepSize >= 0) playerPos.x -= stepSize;
+      if (playerPos.x - playerStepSize >= 0) playerPos.x -= playerStepSize;
       break;
     case 'ArrowRight':
-      if (playerPos.x + stepSize <= gameAreaSize - 40) playerPos.x += stepSize;
+      if (playerPos.x + playerStepSize <= gameAreaSize - 40) playerPos.x += playerStepSize;
       break;
   }
   updatePositions();
@@ -44,8 +45,8 @@ function moveAITowardsPlayer() {
   const distance = Math.sqrt(dx * dx + dy * dy);
 
   if (distance > 0) {
-    aiPos.x += (dx / distance) * stepSize;
-    aiPos.y += (dy / distance) * stepSize;
+    aiPos.x += (dx / distance) * aiStepSize;
+    aiPos.y += (dy / distance) * aiStepSize;
   }
 
   updatePositions();
